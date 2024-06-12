@@ -13,6 +13,9 @@ class Role extends Model
 
 
     
-    protected function users(){return $this->hasMany(User::class);}
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }

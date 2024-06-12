@@ -15,11 +15,6 @@ class MainController extends Controller
 
     public function dashboard(){
 
-        // $last_application = auth()->user()->applications()->latest()->first();
-        // $last_app_date = Carbon::parse($last_application->created_at)->format('Y-m-d');
-        // $today = Carbon::now()->format('Y-m-d');
-
-        // dd($last_app_date );
 
 
         return view('dashboard')->with([

@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
-    public function store(Request $request){
+    public function index()
+    {
+        
+        return view('applications.index')->with([
+            'applications' => auth()->user()->applications
+        ]);
+    }
 
+    public function store(Request $request){
 
         if($this->checkDate()) {
             $path = null;
