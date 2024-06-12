@@ -42,6 +42,18 @@
                         <div>{{$applications->links()}}</div>
 
                    @elseif(auth()->user()->role->name == "client")
+
+                   @if (@session()->has('eror'))
+                       
+                       <div class="w-auto text-grey-darker items-center p-4">
+                        <span class="text-lg font-bold pb-4">
+                            Note
+                        </span>
+                        <p class="leading-tight">
+                            {{session()->get('eror')}}
+                        </p>
+                    </div>
+                   @endif
                   
                    <div class='flex items-center justify-center min-h-screen from-teal-100 via-teal-300 to-teal-500 '>
                     <div class='w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl'>
