@@ -11,33 +11,36 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                    @if (auth()->user()->role->name == "manager")
                     <!-- This is an example component -->
-
                         <h1 style="font-size:32px; padding-bottom:24px">Received Applications</h1>
-
-                        <div class='flex items-center justify-center'>  <div class="rounded-xl border p-5 shadow-md w-12/12 bg-white">
+                        {{-- {{dd($applications)}} --}}
+                        @foreach ( $applications as $application )         
+                        <div class='flex items-center justify-center mb-5'>  <div class="rounded-xl border p-5 shadow-md w-10/12 bg-white">
                             <div class="flex w-full items-center justify-between border-b pb-3">
-                            <div class="flex items-center space-x-3">
-                                <div class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
-                                <div class="text-lg font-bold text-slate-700">Joe Smith</div>
-                            </div>
-                            <div class="flex items-center space-x-8">
-                                <button class="rounded-2xl border bg-neutral-100  px-3 py-1 text-slate-700 font-semibold">Id : 21</button>
-                                <div class="text-xs text-neutral-500">2024-06-11 11:40</div>
-                            </div>
-                            </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
+                                    <div class="text-lg font-bold text-slate-700">{{$application->user->name}}</div>
+                                </div>
+                                <div class="flex items-center space-x-8">
+                                    <button class="rounded-2xl border bg-neutral-100  px-3 py-1 text-slate-700 font-semibold">Id : {{$application->id}}</button>
+                                    <div class="text-xs text-neutral-500">{{$application->created_at->format('Y-m-d')}}</div>
+                                </div>
+                                </div>
 
-                            <div class="mt-4 mb-6">
-                            <div class="mb-3 font-bold text-slate-700">Nulla sed leo tempus, feugiat velit vel, rhoncus neque?</div>
-                            <div class="text-sm text-neutral-600">Aliquam a tristique sapien, nec bibendum urna. Maecenas convallis dignissim turpis, non suscipit mauris interdum at. Morbi sed gravida nisl, a pharetra nulla. Etiam tincidunt turpis leo, ut mollis ipsum consectetur quis. Etiam faucibus est risus, ac condimentum mauris consequat nec. Curabitur eget feugiat massa</div>
-                            </div>
-
-                            <div>
-                            <div class="flex items-center justify-between text-slate-500">
-                                info@company.uz
-                            </div>
+                                <div class="mt-4 mb-6">
+                                <div class="mb-3 font-bold text-slate-700">{{$application->subject}}</div>
+                                <div class="text-sm text-neutral-600">{{$application->message}}</div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between text-slate-500">
+                                        {{$application->user->email}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                        @endforeach
+
+                        <div>{{$applications->links()}}</div>
+
                    @elseif(auth()->user()->role->name == "client")
                   
                    <div class='flex items-center justify-center min-h-screen from-teal-100 via-teal-300 to-teal-500 '>
