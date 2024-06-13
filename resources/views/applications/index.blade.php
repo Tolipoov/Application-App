@@ -52,11 +52,13 @@
                                         <p class="text-slate-700 font-semibold"> {{$application->answer->body}}</p>
                                     </div>
                                 @else
-                                    <div class="flex justify-end">
-                                        <a href="{{ route('answer.create', ['application'=>$application->id]) }}" class=" bg-blue-500 text-white py-2 px-10 rounded-xl font-bold ">
-                                            <span class="relative">Answer</span>
-                                        </a>
-                                    </div>
+                                  @if (auth()->user()->role->name == 'Manager')
+                                  <div class="flex justify-end">
+                                    <a href="{{ route('answer.create', ['application'=>$application->id]) }}" class=" bg-blue-500 text-white py-2 px-10 rounded-xl font-bold ">
+                                        <span class="relative">Answer</span>
+                                    </a>
+                                </div>
+                                  @endif
                             @endif
                             </div>
                         </div>

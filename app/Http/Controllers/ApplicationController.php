@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Mail;
 class ApplicationController extends Controller
 {
     public function index()
-    {
-        
+    {   
+
         return view('applications.index')->with([
-            'applications' => auth()->user()->applications
+            'applications' => auth()->user()->applications()->latest()->paginate(10),
         ]);
     }
 
@@ -59,7 +59,7 @@ class ApplicationController extends Controller
         protected function checkDate()
         {
             $result = true;
-            $last_application = auth()->user()->applications()->latest()->first();
+            $last_application = auth()->user->applications()->latest()->first();
             if($last_application) {
                 $last_app_date = Carbon::parse($last_application->created_at)->format('Y-m-d'); 
                 $today = Carbon ::now()->format('Y-m-d');
